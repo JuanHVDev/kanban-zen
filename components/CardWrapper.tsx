@@ -31,9 +31,15 @@ export const CardWrapper = ({ children, labelButton, labelHref, title, iconTitle
           <SocialIcons />
         </div>
         <div className="flex flex-row justify-center items-center">
-          <p>
-            Do you have an account?{" "}
-          </p>
+          {
+            labelButton === "Sign in" ? (
+              <p>
+                Already have an account?
+              </p>
+            ) : (<p>
+              Don't you have an account?{" "}
+            </p>)
+          }
           <Button variant="link">
             <Link href={labelHref} className=""  >
               {labelButton}
