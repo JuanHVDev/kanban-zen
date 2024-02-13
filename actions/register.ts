@@ -3,6 +3,8 @@ import prisma from "@/lib/db";
 import { z } from "zod";
 import bcryptjs from "bcryptjs";
 import { RegisterSchema } from "@/schemas/RegisterSchema";
+import { generateVerificationToken } from "@/lib/tokens";
+import { sendVerificationEmail } from "@/lib/mail";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
     const validateField = RegisterSchema.safeParse(values);
@@ -26,9 +28,13 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
                 password: hashedPassword,
             },
         });
-
+        const verificationToken = await generateVerificationToken(email);
+        await sendVerificationEmail(
+            verificationToken.email,
+            verificationToken.token
+        );
         return {
-            success: "Usuario creado exitosamente",
+            success: "Confirmación de email enviado",
         };
     } catch (error) {
         return {
