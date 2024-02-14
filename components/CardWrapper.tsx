@@ -12,8 +12,9 @@ interface CardProps
   labelButton: string,
   labelHref: string
   iconTitle?: React.ReactNode
+  showSocial?: boolean
 }
-export const CardWrapper = ({ children, labelButton, labelHref, title, iconTitle }: CardProps) =>
+export const CardWrapper = ({ children, labelButton, labelHref, title, iconTitle, showSocial }: CardProps) =>
 {
   return (
     <Card className={cn('rounded-xl max-w-sm w-full sm:max-w-xl flex flex-col mx-auto my-8 text-2xl border-none shadow-xl mt-20', titleFont.className)}>
@@ -28,7 +29,9 @@ export const CardWrapper = ({ children, labelButton, labelHref, title, iconTitle
       </CardContent>
       <CardFooter className={cn(bodyFont.className, "text-lg flex flex-col")}>
         <div className='max-w-lg'>
-          <SocialIcons />
+          {
+            showSocial && <SocialIcons />
+          }
         </div>
         <div className="flex flex-row justify-center items-center">
           {

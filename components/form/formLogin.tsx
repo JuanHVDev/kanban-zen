@@ -10,6 +10,7 @@ import { LoginSchema } from "@/schemas/LoginSchema"
 import { login } from "@/actions/login"
 import { FormError } from "./FormError"
 import { FormSuccess } from "./FormSuccess"
+import Link from "next/link"
 export const FormLogin = () =>
 {
   const [error, setError] = useState("")
@@ -73,6 +74,14 @@ export const FormLogin = () =>
             </FormItem>
           )}
         />
+        <Button
+          size="sm"
+          variant="link"
+          asChild
+          className="px-0 font-normal"
+        >
+          <Link href="/reset">¿Olvidaste tu contraseña?</Link>
+        </Button>
         <FormError message={error} />
         <FormSuccess message={success} />
         <Button className="mt-5 w-full text-xl" disabled={isPending} type="submit">Login</Button>
