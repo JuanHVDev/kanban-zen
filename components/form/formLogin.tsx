@@ -10,9 +10,12 @@ import { LoginSchema } from "@/schemas/LoginSchema"
 import { login } from "@/actions/login"
 import { FormError } from "./FormError"
 import { FormSuccess } from "./FormSuccess"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 export const FormLogin = () =>
 {
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get("callbackUrl")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [isPending, startTransition] = useTransition()
@@ -30,7 +33,7 @@ export const FormLogin = () =>
     setSuccess("")
     startTransition(() =>
     {
-      login(values).then((data) =>
+      login(values, callbackUrl).then((data) =>
       {
         if (data?.error)
         {

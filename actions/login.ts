@@ -9,7 +9,10 @@ import { AuthError } from "next-auth";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export const login = async (
+    values: z.infer<typeof LoginSchema>,
+    callbackUrl?: string | null
+) => {
     const validateField = LoginSchema.safeParse(values);
 
     if (!validateField.success) {
@@ -39,7 +42,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         await signIn("credentials", {
             email,
             password,
-            redirectTo: DEFAULT_LOGIN_REDIRECT,
+            redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
         });
         return {
             success: "Inicio de sesion exitoso",
