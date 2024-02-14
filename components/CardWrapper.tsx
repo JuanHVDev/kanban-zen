@@ -40,7 +40,7 @@ export const CardWrapper = ({ children, labelButton, labelHref, title, iconTitle
                 Already have an account?
               </p>
             ) : (<p>
-              Don't you have an account?{" "}
+              Don&apos;t you have an account?{" "}
             </p>)
           }
           <Button variant="link">
