@@ -8,6 +8,8 @@ Este es un proyecto en Next.js con ```npx create-next-app``` creando un Trello c
 * Next.js 14
 * Tailwindcss
 * Shadcn Ui
+* Prisma
+* Next-auth
 
 ## Requisitos
 * Node version >= 18
